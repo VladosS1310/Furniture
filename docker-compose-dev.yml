@@ -1,0 +1,12 @@
+
+services:
+
+  web:
+    volumes:
+      - furniture-html-sync:/var/www/html:nocopy
+
+volumes:
+  furniture-html-sync:
+    external: true
+
+# vi:softtabstop=2:shiftwidth=2:

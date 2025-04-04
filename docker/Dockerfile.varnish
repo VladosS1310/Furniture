@@ -1,0 +1,15 @@
+FROM debian:buster-slim
+
+RUN apt-get update && apt-get install --yes \
+        varnish
+
+ARG VARNISH_CONFIG
+
+COPY ./docker/$VARNISH_CONFIG.vcl /etc/varnish/default.vcl
+
+EXPOSE 6081
+EXPOSE 6082
+CMD /usr/sbin/varnishd -F -a :6081 -T localhost:6082 -f /etc/varnish/default.vcl -s malloc,256m -p feature=+esi_ignore_other_elements -p vcc_allow_inline_c=on
+
+
+# vi:filetype=dockerfile:

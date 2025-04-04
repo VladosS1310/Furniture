@@ -1,0 +1,12 @@
+version: "2"
+
+syncs:
+  furniture-html-sync:
+    src: './'
+    sync_strategy: 'rsync'
+    sync_host_port: ${RSYNC_PORT}
+    sync_args: '-v --copy-links --hard-links'
+    sync_userid: 33
+    sync_excludes: [ '.git', '/.composer', '/app/etc/config.php', '/composer.lock', '/docker', '/generated', '/pub/feeds', '/pub/static/_cache', '/pub/static/adminhtml', '/pub/static/deployed_version.txt', '/pub/static/frontend', '/vendor', '/var', '.*.sw?']
+
+# vi:softtabstop=2:shiftwidth=2:

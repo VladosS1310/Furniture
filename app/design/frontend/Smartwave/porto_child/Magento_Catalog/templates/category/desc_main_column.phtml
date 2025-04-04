@@ -1,0 +1,12 @@
+<?php
+    $_category_desc = $this->helper('Smartwave\Porto\Helper\Data')->getConfig('porto_settings/category/category_description');
+
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category'); //Get Current Category
+?>
+<?php if ($_category_desc == "main_column" && $_description = $block->getCurrentCategory()->getDescription()): ?>
+    <div class="category-description category__info">
+        <h1 class="category__heading"><?php echo $category->getName() ?></h1>
+        <div class="category__description"><?php echo $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $_description, 'description') ?></div>
+    </div>
+<?php endif; ?>

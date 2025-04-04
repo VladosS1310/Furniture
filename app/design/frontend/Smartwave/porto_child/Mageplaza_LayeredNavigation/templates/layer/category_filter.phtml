@@ -1,0 +1,109 @@
+<?php
+
+use Magento\Framework\Escaper;
+use Skynix\LayeredNavigation\ViewModel\CategoryFilter;
+use Smartwave\Porto\Block\Template;
+
+/* @var $block Template */
+/* @var $categoryFilter CategoryFilter */
+/* @var $escaper Escaper */
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$categoryFilter = $block->getData('view_model');
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category'); //Get Current Category
+?>
+<?php if($category): ?>
+<?php
+$subcats = $category->getChildrenCategories();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+    if(count($subcats)>0){
+?>
+<div class="block-category-list">
+<!--    <div class="block-title">-->
+<!--        <strong>Category</strong>-->
+<!--    </div>-->
+    <div class="block-content">
+        <ol class="items">
+        <?php
+        foreach($subcats as $subcat){
+        ?>
+            <?php $fullSubCategory = $subcat->getId() ? $categoryFilter->getCategory($subcat->getId()) : null;?>
+            <?php $baseUrl = $block->getBaseUrl(); ?>
+            <?php $subCategoryImageUrl = $fullSubCategory->getImageUrl() ?: null;?>
+            <?php if($category->getName() === $subcat->getName()): ?>
+                <li class="item category-item--active">
+                    <a href="<?php echo $subcat->getUrl() ?>">
+                        <span><?php echo $subcat->getName() ?></span>
+                        <img class="subcategory_image" src="<?= $subCategoryImageUrl
+                            ? $escaper->escapeUrl($baseUrl . $subCategoryImageUrl)
+                            : $escaper->escapeUrl($categoryFilter->getPlaceholderImageUrl()) ?>" alt="<?= $subcat->getName(); ?>"/>
+                    </a>
+<!--                    <span>(--><?php //echo $subcat->getProductCollection()->count(); ?><!--)</span>-->
+                </li>
+            <?php else: ?>
+                <li class="item">
+                    <a href="<?php echo $subcat->getUrl() ?>">
+                        <span><?php echo $subcat->getName() ?></span>
+                        <img class="subcategory_image" src="<?= $subCategoryImageUrl
+                            ? $escaper->escapeUrl($baseUrl . $subCategoryImageUrl)
+                            : $escaper->escapeUrl($categoryFilter->getPlaceholderImageUrl()) ?>" alt="<?= $subcat->getName(); ?>"/>
+                    </a>
+<!--                    <span>(--><?php //echo $subcat->getProductCollection()->count(); ?><!--)</span>-->
+                </li>
+            <?php endif; ?>
+        <?php
+            }
+        ?>
+        </ol>
+    </div>
+    <script type="text/javascript">
+    require([
+        'jquery'
+    ], function ($) {
+        $("#layered-filter-block").before($(".block.block-category-list"));
+    });
+    </script>
+</div>
+
+<?php
+    } else {
+    $subcats = $category->getParentCategory()->getChildrenCategories();
+?>
+        <div class="block-category-list subcategory">
+            <div class="block-title">
+                <strong>Category</strong>
+            </div>
+            <div class="block-content">
+                <ol class="items">
+                    <?php
+                    foreach($subcats as $subcat){
+                        ?>
+                        <?php if($category->getName() === $subcat->getName()): ?>
+                            <li class="item category-item--active">
+                                <a href="<?php echo $subcat->getUrl() ?>"><?php echo $subcat->getName() ?></a>
+                                <span>(<?php echo $subcat->getProductCollection()->count(); ?>)</span>
+                            </li>
+                        <?php else: ?>
+                            <li class="item">
+                                <a href="<?php echo $subcat->getUrl() ?>"><?php echo $subcat->getName() ?></a>
+                                <span>(<?php echo $subcat->getProductCollection()->count(); ?>)</span>
+                            </li>
+                        <?php endif; ?>
+                        <?php
+                    }
+                    ?>
+                </ol>
+            </div>
+            <script type="text/javascript">
+                require([
+                    'jquery'
+                ], function ($) {
+                    $("#layered-filter-block").before($(".block.block-category-list"));
+                });
+            </script>
+        </div>
+
+<?php
+}
+?>
+<?php endif; ?>

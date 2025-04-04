@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category  Apptrian
+ * @package   Apptrian_MetaPixelApi
+ * @author    Apptrian
+ * @copyright Copyright (c) Apptrian (http://www.apptrian.com)
+ * @license   http://www.apptrian.com/license Proprietary Software License EULA
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="Apptrian\MetaPixelApi\Block\Code" 
+                name="apptrian.metapixelapi" 
+                template="Apptrian_MetaPixelApi::code.phtml" 
+                after="-" 
+                ifconfig="apptrian_metapixelapi/browser/enabled" />
+            <block class="Apptrian\MetaPixelApi\Block\Code" 
+                name="apptrian.metapixelapi.breeze" 
+                template="Apptrian_MetaPixelApi::code-breeze.phtml" 
+                after="-" 
+                ifconfig="apptrian_metapixelapi/browser/enabled" />
+            <block class="Apptrian\MetaPixelApi\Block\Code" 
+                name="apptrian.metapixelapi.hyva" 
+                template="Apptrian_MetaPixelApi::code-hyva.phtml" 
+                after="-" 
+                ifconfig="apptrian_metapixelapi/browser/enabled" />
+        </referenceContainer>
+    </body>
+</page>

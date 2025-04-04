@@ -1,0 +1,51 @@
+
+FROM composer:2.7.7 AS composer
+
+
+FROM php:8.2-apache-buster
+
+RUN a2enmod rewrite headers
+
+RUN apt-get update \
+ && apt-get install --yes --no-install-recommends \
+	zip \
+	libjpeg-dev \
+	libpng-dev \
+	libicu-dev \
+	libxslt1-dev \
+	libfreetype6-dev \
+	libzip-dev \
+	default-mysql-client \
+	redis-tools \
+	git \
+	less \
+	unzip \
+	vim \
+	ssh
+
+RUN docker-php-ext-configure \
+	gd --with-jpeg --with-freetype \
+&& docker-php-ext-install \
+	gd \
+	bcmath \
+	intl \
+	xsl \
+	zip \
+	pdo_mysql \
+	soap \
+	sockets \
+ && docker-php-ext-enable \
+	opcache
+
+RUN curl -sSo /usr/bin/n98-magerun2.phar https://files.magerun.net/n98-magerun2.phar
+RUN chmod a+x /usr/bin/n98-magerun2.phar
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+COPY ./docker/php.ini /usr/local/etc/php/php.ini
+
+RUN usermod -s /bin/bash -d /var/www/html www-data
+RUN echo 'export COMPOSER_MEMORY_LIMIT=-1' >> /etc/bash.bashrc
+RUN echo 'alias ll="ls -l"' >> /etc/bash.bashrc
+
+# vi:filetype=dockerfile:

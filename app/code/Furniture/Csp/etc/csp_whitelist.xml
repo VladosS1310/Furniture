@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="img-src">
+            <values>
+                <value id="worker_blob" type="host">blob:</value>
+                <value id="www_google" type="host">www.google.com</value>
+                <value id="www_google_au" type="host">www.google.com.au</value>
+                <value id="lh3_googleusercontent.com" type="host">*.googleusercontent.com</value>
+                <value id="elfsight" type="host">*.elfsight.com</value>
+                <value id="elfsightcdn" type="host">*.elfsightcdn.com</value>
+                <value id="userlike" type="host">*.userlike.com</value>
+                <value id="userlike_store_media_files_s3_amazonaws" type="host">userlike-store-media-files.s3.amazonaws.com</value>
+                <value id="digitaloceanspaces" type="host">service-widget-data-prod.sfo3.digitaloceanspaces.com</value>
+                <value id="zip" type="host">zip.co</value>
+                <value id="bpi_zip" type="host">bpi.zip.co</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="bpi_zip" type="host">bpi.zip.co</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+                <value id="static_zip" type="host">static.zip.co</value>
+            </values>
+        </policy>
+        <policy id="script-src">
+            <values>
+                <value id="elfsight" type="host">*.elfsight.com</value>
+                <value id="elfsightcdn" type="host">*.elfsightcdn.com</value>
+		<value id="userlike_cdn_widgets_s3_eu_west_1_amazonaws" type="host">userlike-cdn-widgets.s3-eu-west-1.amazonaws.com</value>
+		<value id="userlike_cdn_umm_b_cdn" type="host">userlike-cdn-umm.b-cdn.net</value>
+                <value id="bpi_zip" type="host">bpi.zip.co</value>
+            </values>
+        </policy>
+        <policy id="font-src">
+            <values>
+		<value id="userlike_cdn_umm_b_cdn" type="host">userlike-cdn-umm.b-cdn.net</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="www_google" type="host">www.google.com</value>
+                <value id="www_google_au" type="host">www.google.com.au</value>
+                <value id="stats_g_doubleclick" type="host">stats.g.doubleclick.net</value>
+		<value id="userlike_cdn_widgets_s3_eu_west_1_amazonaws" type="host">userlike-cdn-widgets.s3-eu-west-1.amazonaws.com</value>
+                <value id="userlike" type="host">*.userlike.com</value>
+		<value id="wss_umd_userlike" type="host">wss://umd.userlike.com</value>
+		<value id="userlike_cdn_umm_b_cdn" type="host">userlike-cdn-umm.b-cdn.net</value>
+                <value id="elfsight" type="host">*.elfsight.com</value>
+                <value id="elfsightcdn" type="host">*.elfsightcdn.com</value>
+                <value id="stadiamaps" type="host">*.stadiamaps.com</value>
+                <value id="api_zipmoney" type="host">api.zipmoney.com.au</value>
+                <value id="bpi_zip" type="host">bpi.zip.co</value>
+                <value id="trx_zip" type="host">trx.zip.co</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>
